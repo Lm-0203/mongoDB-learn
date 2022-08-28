@@ -12,6 +12,9 @@ const adminRouter = require("./src/router/adminRouter");
 // 加入这个中间件之后，会在req对象中，注入一个cookies属性，用于获取所有请求传递过来的cookies
 // 加入这个中间件之后，会在所有res对象中，注入cookie方法，用于设置cookie
 app.use(cookieParser());
+
+// 应用token中间件
+app.use(require("./src/middleware/tokenMiddleware"));
 /**
  * 下面这段代码的作用：
  * 当请求时，会根据请求的路径，从指定目录中寻找是否存在该文件，如果存在，直接响应文件内容，而不再移交给后续的处理函数
