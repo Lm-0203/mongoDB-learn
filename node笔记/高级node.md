@@ -912,11 +912,11 @@ var username = this.ctx.session.username;
 
 在index.html 中设置session，访问这个页面的时候，响应头中会带有set-cookies
 
-![](C:\Users\Lmljhlb\Desktop\高级node\eggSession.png)
+![](eggSession.png)
 
 
 
-![eggSession-2](C:\Users\Lmljhlb\Desktop\高级node\eggSession-2.png)
+![eggSession-2](eggSession-2.png)
 
 EGG_SESS是默认的key，后面是value，默认的过期时间是24小时，默认httpOnly：true，excrypt：true
 
@@ -924,7 +924,7 @@ EGG_SESS是默认的key，后面是value，默认的过期时间是24小时，�
 
 在 news.html中访问session，在请求头中，会有Cookies和EGG_SESS
 
-![eggSession-3](C:\Users\Lmljhlb\Desktop\高级node\eggSession-3.png)
+![eggSession-3](eggSession-3.png)
 
 
 
@@ -937,10 +937,6 @@ config.session = {
     renew: true,// 延长会话有效期，每次访问页面，session的延长时间会被重新设置一次，为了保证用户正在操作的过程中，session不过期
 }
 ```
-
-
-
-## node如何实现版本升级？为什么要用vnm
 
 
 

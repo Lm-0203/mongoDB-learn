@@ -176,3 +176,69 @@ document.cookie = "key=value; path=?; domain=?; expire=?; max-age=?; secure"
 
 1. 浏览器发送请求到服务器，希望添加一个管理员，并将cookie自动附带到请求中
 2. 服务器先获取cookie，验证cookie中的信息是否正确，如果不正确，不予以操作。如果正确，完成正常的业务流程
+
+
+
+# cookie 和 session 的优缺点
+
+## cookie
+
+优点
+
++ 存在客户端，不占用服务器资源
+
+缺点
+
++ 只能是字符串格式
++ 存储量有限（4kb）
+  + 虽然Web Storage的存储空间更大（5M），但是Web Storage中的数据仅存在本地，不与服务器发生交互
+  + Cookie 中的数据会在浏览器和服务器中来回传递
++ 数据容易被获取
++ 数据容易被篡改
++ 容易丢失
+  + 清除浏览器缓存数据之后就没有了，网站需要重新登录
+
+## Session
+
+优点
+
++ 存储在服务器端
++ 可以是任何格式
++ 存储量理论上是无限的
++ 数据难以被获取
++ 数据难以篡改
++ 数据不易丢失
+
+缺点
+
++ 占用服务器资源，有时会需要很大的服务器成本
++ 浏览器关闭的话，服务器不知道
+
+
+
+# Session
+
+sessionId 一般会用uuId（universal unique identity）。保证唯一性就可以。
+
+因为浏览器关闭的话，服务器不知道。所以 session 可能会有一个过期时间，取决于session是存在哪的。
+
+express有一个session的中间件，是express-session;
+
+```js
+const session = require('express-session');
+const express = require('express');
+const app = express();
+app.use(session({
+    cookie: { // session 存储的信息可能会发给cookie
+        secret: true
+    },
+    secret: string,
+    name: 'sessionId', // 默认值是 connect.sid
+})); // 这样就具备了session的功能
+
+app.get('/', (req, res) => {
+    console.log(req.session); // 可以从req里面直接拿到session信息
+    req.session.info = {}; // 也可以给session里面直接添加属性
+})
+```
+
